@@ -1,12 +1,15 @@
-const { validateEmail, validateName } = require("../helpers/validation");
+const {
+  validateEmail,
+  validateName,
+  validateUsername,
+} = require("../helpers/validation");
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
 const userRegistrationController = async (req, res) => {
   try {
-    const { fname, lname, username, email, password, birthDate } = req.body;
-
+    const { fname, lname, email, password, birthDate } = req.body;
     if (!validateEmail(email)) {
       return res.status(401).send({ message: "Invalid Email Address" });
     }
@@ -21,20 +24,14 @@ const userRegistrationController = async (req, res) => {
         .status(401)
         .send({ message: "Last name should be 4 to 6 characters" });
     }
-    if (validateName(username, 3, 8)) {
-      return res
-        .status(401)
-        .send({ message: "Username should be 4 to 7 characters" });
-    }
-    const usernameExist = await User.findOne({ username: username });
-    const emailExist = await User.findOne({ email: email });
 
-    if (usernameExist) {
-      return res.status(401).send({ message: "Username alread exist" });
-    }
+    const emailExist = await User.findOne({ email: email });
     if (emailExist) {
       return res.status(401).send({ message: "Email alread exist" });
     }
+
+    let tempUsername = fname.toLowerCase() + lname.toLowerCase();
+    let setUsername = await validateUsername(tempUsername);
 
     bcrypt.hash(password, 10, function (err, hash) {
       jwt.sign(
@@ -46,7 +43,7 @@ const userRegistrationController = async (req, res) => {
             fname: fname,
             lname: lname,
             email: email,
-            username: username,
+            username: setUsername,
             password: hash,
             birthDate: birthDate,
             token: token,
@@ -59,6 +56,7 @@ const userRegistrationController = async (req, res) => {
     });
   } catch (error) {
     res.status(401).send(error);
+    console.log(error);
   }
 };
 
