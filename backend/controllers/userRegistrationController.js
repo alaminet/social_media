@@ -1,9 +1,11 @@
 const { validateEmail, validateName } = require("../helpers/validation");
 const User = require("../model/userModel");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+var jwt = require("jsonwebtoken");
+
 const userRegistrationController = async (req, res) => {
   try {
-    const { fname, lname, username, email,password,birthDate } = req.body;
+    const { fname, lname, username, email, password, birthDate } = req.body;
 
     if (!validateEmail(email)) {
       return res.status(401).send({ message: "Invalid Email Address" });
@@ -34,16 +36,26 @@ const userRegistrationController = async (req, res) => {
       return res.status(401).send({ message: "Email alread exist" });
     }
 
-    bcrypt.hash(password, 10, async function(err, hash) {
-        const newUser = await new User({
+    bcrypt.hash(password, 10, function (err, hash) {
+      jwt.sign(
+        { email: email },
+        process.env.PRIVATE_KEY,
+        { expiresIn: "5m" },
+        async function (err, token) {
+          const newUser = await new User({
             fname: fname,
             lname: lname,
             email: email,
             username: username,
             password: hash,
-            birthDate: new Date(birthDate)
+            birthDate: birthDate,
+            token: token,
           }).save();
-        res.status(200).send({ newUser, message: "Registration Successfull" });
+          res
+            .status(200)
+            .send({ newUser, message: "Registration Successfull" });
+        }
+      );
     });
   } catch (error) {
     res.status(401).send(error);

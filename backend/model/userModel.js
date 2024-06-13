@@ -31,6 +31,12 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
+    verify: {
+      type: Boolean,
+      require: true,
+      default: false,
+    },
+    token: String,
     profilePic: {
       type: String,
       require: true,
