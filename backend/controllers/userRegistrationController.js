@@ -6,6 +6,8 @@ const {
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
+const otpGenerator = require("otp-generator");
+const regEmail = require("../helpers/regEmail");
 
 const userRegistrationController = async (req, res) => {
   try {
@@ -39,6 +41,11 @@ const userRegistrationController = async (req, res) => {
         process.env.PRIVATE_KEY,
         { expiresIn: "5m" },
         async function (err, token) {
+          const otp = otpGenerator.generate(5, {
+            upperCaseAlphabets: false,
+            specialChars: false,
+            lowerCaseAlphabets: false,
+          });
           const newUser = await new User({
             fname: fname,
             lname: lname,
@@ -47,7 +54,11 @@ const userRegistrationController = async (req, res) => {
             password: hash,
             birthDate: birthDate,
             token: token,
+            otp: otp,
           }).save();
+
+          // OTP send to email
+          regEmail(newUser.email, newUser.otp, newUser.token, newUser.lname);
           res
             .status(200)
             .send({ newUser, message: "Registration Successfull" });

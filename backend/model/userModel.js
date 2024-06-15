@@ -36,6 +36,7 @@ const userSchema = new Schema(
       default: false,
     },
     token: String,
+    otp: String,
     profilePic: {
       type: String,
       require: true,
