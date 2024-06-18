@@ -5,8 +5,15 @@
 
 /* Color CSS */
 :root{
-    --color-primary : #9900f1;
-    --color-secondary : #e3e3e3;
+    --color-primary : #850F8D;
+    --color-purple : #C738BD;
+    --color-purple-light : #FFE6E6;
+    --color-blue : #01204E;
+    --color-border : #D1D8C5;
+    --color-white : #FFF8DC;
+    --color-black : #0C0C0C;
+    --color-error : #EE4E4E;
+    --color-transparent : transparent;
 }
 
 /* Font Family */

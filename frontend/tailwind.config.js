@@ -4,7 +4,14 @@ export default {
   theme: {
     colors: {
       "color-primary": "var(--color-primary)",
-      "color-secondary": "var(--color-secondary)",
+      "color-purple": "var(--color-purple)",
+      "color-purple-light": "var(--color-purple-light)",
+      "color-blue": "var(--color-blue)",
+      "color-border": "var(--color-border)",
+      "color-white": "var(--color-white)",
+      "color-black": "var(--color-black)",
+      "color-error": "var(--color-error)",
+      "color-transparent": "var(--color-transparent)",
     },
     fontFamily: {
       grilroyRegular: ["Grilroy-Regular"],
