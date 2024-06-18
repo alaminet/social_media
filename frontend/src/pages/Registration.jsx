@@ -1,13 +1,31 @@
 import React from "react";
+import { Formik, useFormik } from "formik";
 import Heading from "../components/Heading";
 import RegistrationSVG from "../assets/svg/RegistrationSVG";
 import Input from "../components/Input";
 import InputRadio from "../components/InputRadio";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import { signUpValid } from "../validation";
+
+const initialState = {
+  fname: "",
+  lname: "",
+  email: "",
+  password: "",
+  gender: "",
+  birthDate: "",
+};
 
 const Registration = () => {
-  const initialvalues = useforkmik;
+  const formik = useFormik({
+    initialValues: initialState,
+    validationSchema: signUpValid,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  const { errors } = formik;
   return (
     <div className="relative overflow-hidden">
       <div className="absolute w-[350px] h-[350px] bg-color-purple-light rounded-full -left-28 -top-28 "></div>
@@ -26,44 +44,78 @@ const Registration = () => {
 
             <div>
               <div className="w-80 text-color-black">
-                <form onSubmit={onSubmitFinished}>
+                <form onSubmit={formik.handleSubmit}>
                   <Input
                     type="text"
                     placeholder="First Name"
                     className=""
-                    error=""
+                    error={errors.fname}
+                    autocomplete="off"
+                    name="fname"
+                    onChange={formik.handleChange}
+                    value={formik.values.fname}
                   />
                   <Input
                     type="text"
                     placeholder="Last Name"
                     className=""
-                    error=""
+                    error={errors.lname}
+                    autocomplete="off"
+                    name="lname"
+                    onChange={formik.handleChange}
+                    value={formik.values.lname}
                   />
                   <Input
                     type="email"
                     placeholder="Email"
                     className=""
-                    error=""
+                    error={errors.email}
+                    autocomplete="off"
+                    name="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
                   />
                   <Input
                     type="password"
                     placeholder="Password"
                     className=""
-                    error=""
+                    error={errors.password}
+                    autocomplete="current-password"
+                    name="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
                   />
                   <div className="flex gap-4 items-center">
                     <label>Birthday: </label>
                     <Input
                       className="w-full"
                       type="date"
-                      id="birthday"
-                      name="birthday"
-                    ></Input>
+                      autocomplete="off"
+                      error={errors.birthDate}
+                      name="birthDate"
+                      onChange={formik.handleChange}
+                      value={formik.values.birthDate}
+                    />
                   </div>
                   <div className="flex gap-4">
-                    <InputRadio name="gender" value="Male" />
-                    <InputRadio name="gender" value="Female" />
-                    <InputRadio name="gender" value="Others" />
+                    <InputRadio
+                      name="gender"
+                      value="Male"
+                      autocomplete="off"
+                      onChange={formik.handleChange}
+                    />
+                    <InputRadio
+                      name="gender"
+                      value="Female"
+                      autocomplete="off"
+                      onChange={formik.handleChange}
+                    />
+                    <InputRadio
+                      name="gender"
+                      value="Others"
+                      autocomplete="off"
+                      onChange={formik.handleChange}
+                    />
                   </div>
                   <Button className="mt-6 mb-2 w-full" type="submit">
                     Submit

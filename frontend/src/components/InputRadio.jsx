@@ -1,10 +1,11 @@
 import React from "react";
 
-const InputRadio = ({ value, name }) => {
+const InputRadio = ({ value, name, onChange }) => {
   return (
     <>
       <div>
-        <input type="radio" value={value} name={name} /> {value}
+        <input onChange={onChange} type="radio" value={value} name={name} />{" "}
+        {value}
       </div>
     </>
   );
