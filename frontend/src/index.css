@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Color CSS */
+:root{
+    --color-primary : #9900f1;
+    --color-secondary : #e3e3e3;
+}
+
+/* Font Family */
+@font-face {
+    font-family: "Grilroy-Regular";
+    src: url(./assets/fonts/Gilroy-Regular.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Black";
+    src: url(./assets/fonts/Gilroy-Black.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Bold";
+    src: url(./assets/fonts/Gilroy-Bold.ttf);
+}
+@font-face {
+    font-family: "Grilroy-ExtraBold";
+    src: url(./assets/fonts/Gilroy-ExtraBold.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Heavy";
+    src: url(./assets/fonts/Gilroy-Heavy.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Light";
+    src: url(./assets/fonts/Gilroy-Light.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Medium";
+    src: url(./assets/fonts/Gilroy-Medium.ttf);
+}
+@font-face {
+    font-family: "Grilroy-SemiBold";
+    src: url(./assets/fonts/Gilroy-SemiBold.ttf);
+}
+@font-face {
+    font-family: "Grilroy-Thin";
+    src: url(./assets/fonts/Gilroy-Thin.ttf);
+}
+@font-face {
+    font-family: "Grilroy-UltraLight";
+    src: url(./assets/fonts/Gilroy-UltraLight.ttf);
+}
