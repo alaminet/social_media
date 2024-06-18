@@ -7,6 +7,7 @@ import InputRadio from "../components/InputRadio";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { signUpValid } from "../validation";
+import { Helmet } from "react-helmet-async";
 
 const initialState = {
   fname: "",
@@ -27,14 +28,17 @@ const Registration = () => {
   });
   const { errors } = formik;
   return (
-    <div className="relative overflow-hidden">
-      <div className="absolute w-[350px] h-[350px] bg-color-purple-light rounded-full -left-28 -top-28 "></div>
-      <div className="absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-28 -top-28 "></div>
-      <div className="absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-20 -bottom-20 "></div>
-      <div className="container">
-        <div className="flex justify-center items-center h-screen">
+    <div className="relative lg:overflow-hidden">
+      <Helmet>
+        <title>Registration</title>
+      </Helmet>
+      <div className="hidden lg:block absolute w-[350px] h-[350px] bg-color-purple-light rounded-full -left-28 -top-28 -z-10"></div>
+      <div className="hidden lg:block absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-28 -top-28 -z-10"></div>
+      <div className="hidden lg:block absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-20 -bottom-20 -z-10"></div>
+      <div className="container z-10">
+        <div className="flex justify-center items-center lg:h-screen">
           <div className="flex gap-4">
-            <div>
+            <div className="hidden md:block">
               <Heading
                 title="Start Your Journey"
                 className="text-3xl text-center"
@@ -43,7 +47,7 @@ const Registration = () => {
             </div>
 
             <div>
-              <div className="w-80 text-color-black">
+              <div className="sm:w-80 text-color-black">
                 <form onSubmit={formik.handleSubmit}>
                   <Input
                     type="text"
