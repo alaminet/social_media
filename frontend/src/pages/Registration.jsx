@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import moment from "moment";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import Heading from "../components/Heading";
@@ -9,6 +11,7 @@ import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { signUpValid } from "../validation";
 import { Helmet } from "react-helmet-async";
+import { useAddUserMutation } from "../features/api/authApi";
 
 const initialState = {
   fname: "",
@@ -20,21 +23,66 @@ const initialState = {
 };
 
 const Registration = () => {
+  // const baseURL = import.meta.env.VITE_BASE_URL;
+  const [addUser, { isLoading }] = useAddUserMutation();
+
+  const regi = async () => {
+    const singUp = await addUser({
+      fname: formik.values.fname,
+      lname: formik.values.lname,
+      email: formik.values.email,
+      password: formik.values.password,
+      gender: formik.values.gender,
+      birthDate: formik.values.birthDate,
+    });
+    console.log(singUp.data);
+  };
+
   const formik = useFormik({
     initialValues: initialState,
     validationSchema: signUpValid,
     onSubmit: (values) => {
       const currentDate = new Date();
       const pickBDate = new Date(values.birthDate);
+      const adult = new Date(1970 + 18, 0, 1);
 
-      if (currentDate.getFullYear() - pickBDate.getFullYear() < 18) {
+      if (currentDate - pickBDate < adult) {
         toast.warn("You are under 18? try again!", {
           position: "bottom-center",
           autoClose: 1000,
           pauseOnHover: false,
         });
       } else {
-        console.log(pickBDate.getFullYear() - currentDate.getFullYear());
+        regi();
+        // try {
+        //   const data = axios
+        //     .post(`${baseURL}/v1/api/auth/registration`, {
+        //       fname: values.fname,
+        //       lname: values.lname,
+        //       email: values.email,
+        //       password: values.password,
+        //       birthDate: moment(pickBDate).format(),
+        //       gender: values.gender,
+        //     })
+        //     .then((response) => {
+        //       toast.success(response.data.message, {
+        //         position: "bottom-center",
+        //         autoClose: 1000,
+        //         pauseOnHover: false,
+        //       });
+        //       console.log(response);
+        //     })
+        //     .catch((error) => {
+        //       toast.warn(error.response.data.message, {
+        //         position: "bottom-center",
+        //         autoClose: 1000,
+        //         pauseOnHover: false,
+        //       });
+        //       // console.log(error.response.data.message);
+        //     });
+        // } catch (error) {
+        //   console.log(error);
+        // }
       }
     },
   });
@@ -118,19 +166,19 @@ const Registration = () => {
                     <div className="flex gap-4">
                       <InputRadio
                         name="gender"
-                        value="Male"
+                        value="male"
                         autocomplete="off"
                         onChange={formik.handleChange}
                       />
                       <InputRadio
                         name="gender"
-                        value="Female"
+                        value="female"
                         autocomplete="off"
                         onChange={formik.handleChange}
                       />
                       <InputRadio
                         name="gender"
-                        value="Others"
+                        value="others"
                         autocomplete="off"
                         onChange={formik.handleChange}
                       />

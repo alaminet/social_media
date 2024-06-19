@@ -14,8 +14,7 @@ async function regEmail(email, otp, token, name) {
     from: '"Social Media" <addme4et@gmail.com>', // sender address
     to: email, // list of receivers
     subject: "Verify Your Account", // Subject line
-    html: 
-    `
+    html: `
     <div style="display:flex;justify-content:center;align-items:center">
     <div style="text-align:center">
     <h6 style="font-size:28px;color:#1a2130;margin:0">Thanks for Registration, ${name} !</h6>

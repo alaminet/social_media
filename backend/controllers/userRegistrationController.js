@@ -11,7 +11,7 @@ const regEmail = require("../helpers/regEmail");
 
 const userRegistrationController = async (req, res) => {
   try {
-    const { fname, lname, email, password, birthDate } = req.body;
+    const { fname, lname, email, password, birthDate, gender } = req.body;
     if (!validateEmail(email)) {
       return res.status(401).send({ message: "Invalid Email Address" });
     }
@@ -50,6 +50,7 @@ const userRegistrationController = async (req, res) => {
             fname: fname,
             lname: lname,
             email: email,
+            gender: gender,
             username: setUsername,
             password: hash,
             birthDate: birthDate,

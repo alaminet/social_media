@@ -5,7 +5,7 @@ const InputRadio = ({ value, name, onChange }) => {
     <>
       <div>
         <input onChange={onChange} type="radio" value={value} name={name} />{" "}
-        {value}
+        {value.charAt(0).toUpperCase() + value.slice(1)}
       </div>
     </>
   );
