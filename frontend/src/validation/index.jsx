@@ -16,3 +16,7 @@ export const signInValid = Yup.object({
 export const otpValid = Yup.object({
   otp: Yup.string().required("Please enter your OTP"),
 });
+
+export const emailValid = Yup.object({
+  email: Yup.string().email().required("Please enter your Email"),
+});

@@ -6,23 +6,21 @@ import RegistrationSVG from "../assets/svg/RegistrationSVG";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { signInValid } from "../validation";
+import { emailValid } from "../validation";
 import { Helmet } from "react-helmet-async";
-import { useLoginUserMutation } from "../features/api/authApi";
+import { useResendOTPMutation } from "../features/api/authApi";
 
 const initialState = {
   email: "",
-  password: "",
 };
 
-const Login = () => {
+const ResendOTP = () => {
   const navigate = useNavigate();
-  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const [resendOTP, { isLoading }] = useResendOTPMutation();
 
-  const login = async () => {
-    await loginUser({
+  const resend = async () => {
+    await resendOTP({
       email: formik.values.email,
-      password: formik.values.password,
     })
       .then((response) => {
         // Success
@@ -32,7 +30,9 @@ const Login = () => {
             autoClose: 1000,
             pauseOnHover: false,
           });
-          console.log(response?.data);
+          setTimeout(() => {
+            navigate(`/login`);
+          }, 3000);
         }
         // error
         if (response?.error) {
@@ -41,9 +41,14 @@ const Login = () => {
             autoClose: 1000,
             pauseOnHover: false,
           });
-          if (response?.error?.data.message === "Account Not Verifyed") {
+          if (response?.error?.data.message == "Email Verifyed, Try to login") {
             setTimeout(() => {
-              navigate(`/otp/${formik.values.email}`);
+              navigate(`/login`);
+            }, 3000);
+          }
+          if (response?.error?.data.message == "OTP Expaired") {
+            setTimeout(() => {
+              navigate(`/resendotp`);
             }, 3000);
           }
         }
@@ -55,9 +60,9 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: initialState,
-    validationSchema: signInValid,
+    validationSchema: emailValid,
     onSubmit: (values) => {
-      login();
+      resend();
     },
   });
   const { errors } = formik;
@@ -66,7 +71,7 @@ const Login = () => {
       <div className="relative lg:overflow-hidden">
         <ToastContainer />
         <Helmet>
-          <title>Login</title>
+          <title>Resend OTP</title>
         </Helmet>
         <div className="hidden lg:block absolute w-[350px] h-[350px] bg-color-purple-light rounded-full -left-28 -top-28 -z-10"></div>
         <div className="hidden lg:block absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-28 -top-28 -z-10"></div>
@@ -76,7 +81,7 @@ const Login = () => {
             <div className="flex gap-4">
               <div className="hidden md:block">
                 <Heading
-                  title="Enter Your New World !"
+                  title="Resend New OTP !"
                   className="text-3xl text-center"
                 />
                 <RegistrationSVG className="w-96" />
@@ -87,7 +92,7 @@ const Login = () => {
                   <form onSubmit={formik.handleSubmit}>
                     <Input
                       type="email"
-                      placeholder="Email"
+                      placeholder="Enter you Email"
                       className=""
                       error={errors.email}
                       autocomplete="off"
@@ -95,19 +100,9 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.email}
                     />
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      className=""
-                      error={errors.password}
-                      autocomplete="current-password"
-                      name="password"
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
-                    />
 
                     <Button className="mt-6 mb-2 w-full" type="submit">
-                      Login
+                      Send OTP
                     </Button>
                     <Link className="text-color-primary" to="/signup">
                       You don't have an account !
@@ -123,4 +118,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResendOTP;

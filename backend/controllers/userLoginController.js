@@ -7,27 +7,17 @@ const userLoginController = async (req, res) => {
   try {
     const userExist = await User.findOne({ email: email });
     if (userExist) {
-      bcrypt.compare(password, userExist.password, function (err, result) {
-        if (result) {
-          jwt.verify(
-            userExist.token,
-            process.env.PRIVATE_KEY,
-            function (err, decoded) {
-              if (err) {
-                res.status(401).send({
-                  message: "Your Token Expaired, Please Verify Again",
-                });
-              } else {
-                res
-                  .status(200)
-                  .send({ userExist, message: "Login Successful" });
-              }
-            }
-          );
-        } else {
-          res.status(401).send({ message: "Password not matched" });
-        }
-      });
+      if (userExist.verify) {
+        bcrypt.compare(password, userExist.password, function (err, result) {
+          if (result) {
+            res.status(200).send({ userExist, message: "Login Successful" });
+          } else {
+            res.status(401).send({ message: "Password not matched" });
+          }
+        });
+      } else {
+        res.status(401).send({ message: "Account Not Verifyed" });
+      }
     } else {
       res.status(401).send({ message: "Email is not Exist" });
     }

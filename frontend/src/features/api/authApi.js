@@ -24,10 +24,26 @@ export const authApi = createApi({
         body,
       }),
     }),
+    resendOTP: builder.mutation({
+      query: (body) => ({
+        url: "/v1/api/auth/resendotp",
+        method: "POST",
+        body,
+      }),
+    }),
+    tokenVerify: builder.mutation({
+      query: (body) => ({
+        url: "/v1/api/auth/token",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 export const {
   useAddUserMutation,
   useLoginUserMutation,
   useOtpVerifyMutation,
+  useResendOTPMutation,
+  useTokenVerifyMutation,
 } = authApi;

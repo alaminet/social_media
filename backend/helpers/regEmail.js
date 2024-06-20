@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 async function regEmail(email, otp, token, name) {
-  const verifyLink = `${process.env.BASE_URL}/mailverify/${token}`;
+  const verifyLink = `${process.env.BASE_URL}/token/${token}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

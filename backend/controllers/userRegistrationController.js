@@ -63,6 +63,14 @@ const userRegistrationController = async (req, res) => {
           res
             .status(200)
             .send({ newUser, message: "Registration Successfull" });
+          // resetOTP
+          setTimeout(async () => {
+            await User.findOneAndUpdate(
+              { email: newUser.email },
+              { $set: { otp: "" } },
+              { new: true }
+            );
+          }, 300000);
         }
       );
     });

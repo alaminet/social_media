@@ -8,6 +8,8 @@ import Registration from "./pages/Registration";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VerifyOTP from "./pages/VerifyOTP";
+import ResendOTP from "./pages/ResendOTP";
+import VerifyToken from "./pages/VerifyToken";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signup" element={<Registration />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/otp/:email" element={<VerifyOTP />}></Route>
+        <Route path="/token/:token" element={<VerifyToken />}></Route>
+        <Route path="/resendotp" element={<ResendOTP />}></Route>
       </Route>
     )
   );

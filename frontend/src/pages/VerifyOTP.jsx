@@ -47,6 +47,11 @@ const VerifyOTP = () => {
               navigate(`/login`);
             }, 3000);
           }
+          if (response?.error?.data.message == "OTP Expaired") {
+            setTimeout(() => {
+              navigate(`/resendotp`);
+            }, 3000);
+          }
         }
       })
       .catch((error) => {
@@ -67,7 +72,7 @@ const VerifyOTP = () => {
       <div className="relative lg:overflow-hidden">
         <ToastContainer />
         <Helmet>
-          <title>Login</title>
+          <title>Verify OTP</title>
         </Helmet>
         <div className="hidden lg:block absolute w-[350px] h-[350px] bg-color-purple-light rounded-full -left-28 -top-28 -z-10"></div>
         <div className="hidden lg:block absolute w-[200px] h-[200px] bg-color-purple-light rounded-full -right-28 -top-28 -z-10"></div>
