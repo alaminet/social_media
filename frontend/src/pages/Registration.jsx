@@ -46,7 +46,7 @@ const Registration = () => {
           });
           formik.resetForm();
           setTimeout(() => {
-            navigate("/login");
+            navigate(`/otp/${response?.data.newUser.email}`);
           }, 3000);
         }
 

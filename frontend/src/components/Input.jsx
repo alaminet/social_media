@@ -19,10 +19,10 @@ const Input = ({
           value={value}
           name={name}
           autoComplete={autocomplete}
-          className={`${className} outline-none w-full text-color-blue border-b-2 border-b-color-purple-light focus:border-b-color-purple`}
+          className={`${className} outline-none w-full text-color-blue border-b-2 border-b-color-purple-light focus:border-b-color-purple p-2 rounded-sm`}
           placeholder={placeholder}
         />
-        <p className="text-color-error text-xs">{error}</p>
+        <p className="text-color-error text-xs ml-2">{error}</p>
       </div>
     </>
   );

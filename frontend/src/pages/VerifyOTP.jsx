@@ -5,23 +5,23 @@ import Heading from "../components/Heading";
 import RegistrationSVG from "../assets/svg/RegistrationSVG";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
-import { signInValid } from "../validation";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { otpValid } from "../validation";
 import { Helmet } from "react-helmet-async";
-import { useLoginUserMutation } from "../features/api/authApi";
+import { useOtpVerifyMutation } from "../features/api/authApi";
 
 const initialState = {
-  email: "",
-  password: "",
+  otp: "",
 };
+const VerifyOTP = () => {
+  const params = useParams();
+  const navigate = useNavigate();
+  const [otpVerify, { isLoading }] = useOtpVerifyMutation();
 
-const Login = () => {
-  const [loginUser, { isLoading }] = useLoginUserMutation();
-
-  const login = async () => {
-    await loginUser({
-      email: formik.values.email,
-      password: formik.values.password,
+  const verify = async () => {
+    await otpVerify({
+      email: params.email,
+      otp: formik.values.otp,
     })
       .then((response) => {
         // Success
@@ -31,7 +31,9 @@ const Login = () => {
             autoClose: 1000,
             pauseOnHover: false,
           });
-          console.log(response?.data);
+          setTimeout(() => {
+            navigate(`/login`);
+          }, 3000);
         }
         // error
         if (response?.error) {
@@ -40,6 +42,11 @@ const Login = () => {
             autoClose: 1000,
             pauseOnHover: false,
           });
+          if (response?.error?.data.message == "Email Verifyed, Try to login") {
+            setTimeout(() => {
+              navigate(`/login`);
+            }, 3000);
+          }
         }
       })
       .catch((error) => {
@@ -49,9 +56,9 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: initialState,
-    validationSchema: signInValid,
+    validationSchema: otpValid,
     onSubmit: (values) => {
-      login();
+      verify();
     },
   });
   const { errors } = formik;
@@ -70,7 +77,7 @@ const Login = () => {
             <div className="flex gap-4">
               <div className="hidden md:block">
                 <Heading
-                  title="Enter Your New World !"
+                  title="Verify your OTP !"
                   className="text-3xl text-center"
                 />
                 <RegistrationSVG className="w-96" />
@@ -80,28 +87,18 @@ const Login = () => {
                 <div className="sm:w-80 text-color-black">
                   <form onSubmit={formik.handleSubmit}>
                     <Input
-                      type="email"
-                      placeholder="Email"
+                      type="text"
+                      placeholder="Enter you OTP"
                       className=""
-                      error={errors.email}
+                      error={errors.otp}
                       autocomplete="off"
-                      name="email"
+                      name="otp"
                       onChange={formik.handleChange}
-                      value={formik.values.email}
-                    />
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      className=""
-                      error={errors.password}
-                      autocomplete="current-password"
-                      name="password"
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
+                      value={formik.values.otp}
                     />
 
                     <Button className="mt-6 mb-2 w-full" type="submit">
-                      Login
+                      Verify
                     </Button>
                     <Link className="text-color-primary" to="/signup">
                       You don't have an account !
@@ -117,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default VerifyOTP;
