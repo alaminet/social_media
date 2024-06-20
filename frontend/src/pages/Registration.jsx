@@ -8,7 +8,7 @@ import RegistrationSVG from "../assets/svg/RegistrationSVG";
 import Input from "../components/Input";
 import InputRadio from "../components/InputRadio";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUpValid } from "../validation";
 import { Helmet } from "react-helmet-async";
 import { useAddUserMutation } from "../features/api/authApi";
@@ -23,6 +23,7 @@ const initialState = {
 };
 
 const Registration = () => {
+  const navigate = useNavigate();
   // const baseURL = import.meta.env.VITE_BASE_URL;
   const [addUser, { isLoading }] = useAddUserMutation();
 
@@ -36,19 +37,27 @@ const Registration = () => {
       birthDate: moment(formik.values.birthDate).format(),
     })
       .then((response) => {
-        response?.data &&
+        // success
+        if (response?.data) {
           toast.success(response?.data?.message, {
             position: "bottom-center",
             autoClose: 1000,
             pauseOnHover: false,
           });
+          formik.resetForm();
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+        }
 
-        response?.error &&
+        // error
+        if (response?.error) {
           toast.error(response?.error?.data.message, {
             position: "bottom-center",
             autoClose: 1000,
             pauseOnHover: false,
           });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -203,7 +212,7 @@ const Registration = () => {
                     <Button className="mt-6 mb-2 w-full" type="submit">
                       Submit
                     </Button>
-                    <Link className="text-color-primary" to="#">
+                    <Link className="text-color-primary" to="/login">
                       Already have an account !
                     </Link>
                   </form>

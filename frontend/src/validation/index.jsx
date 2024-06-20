@@ -7,3 +7,8 @@ export const signUpValid = Yup.object({
   password: Yup.string().min(5).required("Please enter your Password"),
   birthDate: Yup.string().required("Please enter your Birthday"),
 });
+
+export const signInValid = Yup.object({
+  email: Yup.string().email().required("Please enter your Email"),
+  password: Yup.string().min(5).required("Please enter your Password"),
+});
