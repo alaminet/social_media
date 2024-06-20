@@ -26,16 +26,33 @@ const Registration = () => {
   // const baseURL = import.meta.env.VITE_BASE_URL;
   const [addUser, { isLoading }] = useAddUserMutation();
 
-  const regi = async () => {
+  const registration = async () => {
     const singUp = await addUser({
       fname: formik.values.fname,
       lname: formik.values.lname,
       email: formik.values.email,
       password: formik.values.password,
       gender: formik.values.gender,
-      birthDate: formik.values.birthDate,
-    });
-    console.log(singUp.data);
+      birthDate: moment(formik.values.birthDate).format(),
+    })
+      .then((response) => {
+        response?.data &&
+          toast.success(response?.data?.message, {
+            position: "bottom-center",
+            autoClose: 1000,
+            pauseOnHover: false,
+          });
+
+        response?.error &&
+          toast.error(response?.error?.data.message, {
+            position: "bottom-center",
+            autoClose: 1000,
+            pauseOnHover: false,
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const formik = useFormik({
@@ -53,7 +70,7 @@ const Registration = () => {
           pauseOnHover: false,
         });
       } else {
-        regi();
+        registration();
         // try {
         //   const data = axios
         //     .post(`${baseURL}/v1/api/auth/registration`, {
