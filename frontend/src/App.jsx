@@ -10,16 +10,22 @@ import Login from "./pages/Login";
 import VerifyOTP from "./pages/VerifyOTP";
 import ResendOTP from "./pages/ResendOTP";
 import VerifyToken from "./pages/VerifyToken";
+import LoginRouter from "./privateRouter/LoginRouter";
+import LogoutRouter from "./privateRouter/LogoutRouter";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/signup" element={<Registration />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/otp/:email" element={<VerifyOTP />}></Route>
-        <Route path="/token/:token" element={<VerifyToken />}></Route>
-        <Route path="/resendotp" element={<ResendOTP />}></Route>
+        <Route element={<LoginRouter />}>
+          <Route path="/" element={<Home />}></Route>
+        </Route>
+        <Route element={<LogoutRouter />}>
+          <Route path="/signup" element={<Registration />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/otp/:email" element={<VerifyOTP />}></Route>
+          <Route path="/token/:token" element={<VerifyToken />}></Route>
+          <Route path="/resendotp" element={<ResendOTP />}></Route>
+        </Route>
       </Route>
     )
   );
