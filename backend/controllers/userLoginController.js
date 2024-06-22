@@ -10,7 +10,19 @@ const userLoginController = async (req, res) => {
       if (userExist.verify) {
         bcrypt.compare(password, userExist.password, function (err, result) {
           if (result) {
-            res.status(200).send({ userExist, message: "Login Successful" });
+            res.status(200).send({
+              userInfo: {
+                id: userExist.id,
+                fname: userExist.fname,
+                lname: userExist.lname,
+                username: userExist.username,
+                email: userExist.email,
+                verify: userExist.verify,
+                profilePic: userExist.profilePic,
+                cover: userExist.cover,
+              },
+              message: "Login Successful",
+            });
           } else {
             res.status(401).send({ message: "Password not matched" });
           }

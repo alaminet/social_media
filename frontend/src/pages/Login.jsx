@@ -9,6 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInValid } from "../validation";
 import { Helmet } from "react-helmet-async";
 import { useLoginUserMutation } from "../features/api/authApi";
+import { useDispatch } from "react-redux";
+import { Loginuser } from "../features/userSlice";
 
 const initialState = {
   email: "",
@@ -16,6 +18,7 @@ const initialState = {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser, { isLoading }] = useLoginUserMutation();
 
@@ -27,12 +30,16 @@ const Login = () => {
       .then((response) => {
         // Success
         if (response?.data) {
+          dispatch(Loginuser(response?.data.userInfo));
+          localStorage.setItem("user", JSON.stringify(response?.data.userInfo));
           toast.success(response?.data?.message, {
             position: "bottom-center",
             autoClose: 1000,
             pauseOnHover: false,
           });
-          console.log(response?.data);
+          console.log(response?.data.userInfo);
+
+            navigate("/");
         }
         // error
         if (response?.error) {
