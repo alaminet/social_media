@@ -12,12 +12,15 @@ import ResendOTP from "./pages/ResendOTP";
 import VerifyToken from "./pages/VerifyToken";
 import LoginRouter from "./privateRouter/LoginRouter";
 import LogoutRouter from "./privateRouter/LogoutRouter";
+import NewsFeed from "./components/NewsFeed";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route element={<LoginRouter />}>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />}>
+            <Route path="newsfeed" element={<NewsFeed />}></Route>
+          </Route>
         </Route>
         <Route element={<LogoutRouter />}>
           <Route path="/signup" element={<Registration />}></Route>
