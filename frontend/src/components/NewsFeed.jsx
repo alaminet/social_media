@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import SearchBox from "./SearchBox";
+import OutSideClick from "../functions/click";
 
 const NewsFeed = () => {
   return (
