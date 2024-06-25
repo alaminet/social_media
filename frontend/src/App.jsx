@@ -12,7 +12,9 @@ import ResendOTP from "./pages/ResendOTP";
 import VerifyToken from "./pages/VerifyToken";
 import LoginRouter from "./privateRouter/LoginRouter";
 import LogoutRouter from "./privateRouter/LogoutRouter";
-import NewsFeed from "./components/NewsFeed";
+import NewsFeed from "./pages/NewsFeed";
+import Message from "./pages/Message";
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +22,7 @@ function App() {
         <Route element={<LoginRouter />}>
           <Route path="/" element={<Home />}>
             <Route path="newsfeed" element={<NewsFeed />}></Route>
+            <Route path="message" element={<Message />}></Route>
           </Route>
         </Route>
         <Route element={<LogoutRouter />}>

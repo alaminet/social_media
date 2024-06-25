@@ -7,7 +7,7 @@ import SunIcon from "../assets/svg/SunIcon";
 import { useDispatch } from "react-redux";
 import { Loginuser } from "../features/userSlice";
 
-const IconGroupOne = ({ className, data }) => {
+const IconGroupOne = ({ className, data, Sidestate }) => {
   const [option, setOption] = useState(false);
   const [subOption, setSubOption] = useState(false);
   const [dark, setDark] = useState(false);
@@ -17,6 +17,7 @@ const IconGroupOne = ({ className, data }) => {
   const handleOption = (e) => {
     navigate(e.key || "#");
     setOption(!option);
+    Sidestate(e.key);
   };
 
   const handleLogOut = () => {
@@ -41,7 +42,7 @@ const IconGroupOne = ({ className, data }) => {
         <div>
           <div
             onClick={() => setSubOption(!subOption)}
-            className={`flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 ${
+            className={`flex gap-3 items-center hover:bg-color-blue text-sm hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 ${
               subOption && "text-color-white bg-color-blue"
             }`}
           >
@@ -53,7 +54,7 @@ const IconGroupOne = ({ className, data }) => {
               <div className="flex gap-2 justify-end items-center rounded-lg text-color-blue my-2">
                 <div
                   onClick={() => setDark(true)}
-                  className={`flex gap-2 items-center p-2 rounded-lg text-sm text-color-blue my-2 hover:bg-color-blue hover:text-color-white hover:cursor-pointer transition-all duration-150 ease-linear ${
+                  className={`flex gap-2 items-center p-2 rounded-lg my-2 hover:bg-color-blue hover:text-color-white hover:cursor-pointer transition-all duration-150 ease-linear ${
                     dark && "text-color-white bg-color-blue"
                   }`}
                 >
@@ -64,7 +65,7 @@ const IconGroupOne = ({ className, data }) => {
                 </div>
                 <div
                   onClick={() => setDark(false)}
-                  className={`flex gap-2 items-center p-2 rounded-lg text-sm text-color-blue my-2 hover:bg-color-blue hover:text-color-white hover:cursor-pointer transition-all duration-150 ease-linear ${
+                  className={`flex gap-2 items-center p-2 rounded-lg my-2 hover:bg-color-blue hover:text-color-white hover:cursor-pointer transition-all duration-150 ease-linear ${
                     !dark && "text-color-white bg-color-blue"
                   }`}
                 >
@@ -97,9 +98,7 @@ const IconGroupOne = ({ className, data }) => {
       ) : (
         <div
           onClick={() => handleOption(data)} //navigate(data.key || "#")
-          className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 ${
-            option && "text-color-white bg-color-blue"
-          }`}
+          className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2`}
         >
           <div>
             <data.icon />

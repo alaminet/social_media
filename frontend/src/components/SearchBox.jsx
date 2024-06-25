@@ -30,7 +30,7 @@ const SearchBox = () => {
             <div
               ref={clickOutSide}
               hidden={!show}
-              className="top-0 -z-10 w-full max-h-80 pt-5 pb-3 pl-4 rounded-tl-3xl rounded-tr-3xl rounded-b-md shadow-lg"
+              className="absolute top-8 -z-10 w-full max-h-80 pt-5 pb-3 pl-4 rounded-tl-3xl rounded-tr-3xl rounded-b-md shadow-lg"
             >
               Search list
             </div>

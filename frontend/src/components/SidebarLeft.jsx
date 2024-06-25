@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IconGroupOne from "./IconGroupOne";
 import defaultProPic from "../assets/images/avatar_boy_cap.png";
 import { NewsFeed } from "../assets/svg/NewsFeed";
@@ -7,8 +7,11 @@ import { Friends } from "../assets/svg/Friends";
 import { Media } from "../assets/svg/Media";
 import { Settings } from "../assets/svg/Settings";
 
-
-const SidebarLeft = ({ user }) => {
+const SidebarLeft = ({ user, state }) => {
+  const [Sidestate, setSideState] = useState();
+  useEffect(() => {
+    state(Sidestate);
+  }, [Sidestate]);
   const data = [
     {
       title: "News Feed",
@@ -54,7 +57,7 @@ const SidebarLeft = ({ user }) => {
             </div>
             <div className="my-8">
               {data?.map((data, i) => (
-                <IconGroupOne key={i} data={data} />
+                <IconGroupOne key={i} data={data} Sidestate={setSideState} />
               ))}
             </div>
           </div>
