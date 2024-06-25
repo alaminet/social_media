@@ -7,6 +7,7 @@ import { Friends } from "../assets/svg/Friends";
 import { Media } from "../assets/svg/Media";
 import { Settings } from "../assets/svg/Settings";
 
+
 const SidebarLeft = ({ user }) => {
   const data = [
     {
@@ -32,7 +33,6 @@ const SidebarLeft = ({ user }) => {
     {
       title: "Settings",
       icon: Settings,
-      key: "settings",
     },
   ];
   return (

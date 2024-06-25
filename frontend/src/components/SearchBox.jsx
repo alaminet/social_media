@@ -27,16 +27,13 @@ const SearchBox = () => {
                 placeholder="Search..."
               />
             </div>
-            {show && (
-              <div
-                ref={clickOutSide}
-                className={`opacity-0 top-0 -z-10 w-full max-h-80 pt-5 pb-3 pl-4 rounded-tl-3xl rounded-tr-3xl rounded-b-md transition-all ease-linear duration-200 shadow-lg ${
-                  show && "opacity-100"
-                }`}
-              >
-                Search box
-              </div>
-            )}
+            <div
+              ref={clickOutSide}
+              hidden={!show}
+              className="top-0 -z-10 w-full max-h-80 pt-5 pb-3 pl-4 rounded-tl-3xl rounded-tr-3xl rounded-b-md shadow-lg"
+            >
+              Search list
+            </div>
           </div>
         </form>
       </div>
