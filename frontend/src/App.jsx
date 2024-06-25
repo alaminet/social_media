@@ -14,6 +14,8 @@ import LoginRouter from "./privateRouter/LoginRouter";
 import LogoutRouter from "./privateRouter/LogoutRouter";
 import NewsFeed from "./pages/NewsFeed";
 import Message from "./pages/Message";
+import Friends from "./pages/Friends";
+import Media from "./pages/Media";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,6 +25,8 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route path="newsfeed" element={<NewsFeed />}></Route>
             <Route path="message" element={<Message />}></Route>
+            <Route path="friends" element={<Friends />}></Route>
+            <Route path="media" element={<Media />}></Route>
           </Route>
         </Route>
         <Route element={<LogoutRouter />}>

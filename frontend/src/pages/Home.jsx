@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import SidebarLeft from "../components/SidebarLeft";
 import SearchBox from "../components/SearchBox";
+import SidebarRight from "../components/SidebarRight";
 
 const Home = () => {
   const { userInfo } = useSelector((user) => user.loginSlice);
@@ -26,7 +27,9 @@ const Home = () => {
             </div>
             <Outlet />
           </div>
-          <div>right</div>
+          <div>
+            <SidebarRight />
+          </div>
         </div>
       </div>
     </>

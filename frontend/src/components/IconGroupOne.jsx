@@ -19,7 +19,6 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
     setOption(!option);
     Sidestate(e.key);
   };
-
   const handleLogOut = () => {
     localStorage.removeItem("user");
     dispatch(Loginuser(null));
@@ -98,7 +97,7 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
       ) : (
         <div
           onClick={() => handleOption(data)} //navigate(data.key || "#")
-          className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2`}
+          className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 `}
         >
           <div>
             <data.icon />
