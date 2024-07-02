@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import SidebarLeft from "../components/SidebarLeft";
@@ -12,14 +12,16 @@ const Home = () => {
   return (
     <>
       <div>
-        <div className="grid gap-4 grid-cols-[1fr,3fr,1fr] px-3">
-          <div>
+        <div className="grid gap-4 lg:grid-cols-[1fr,3fr,1fr] px-3">
+          <div className="hidden lg:block">
             <SidebarLeft user={userInfo} state={setState} />
           </div>
           <div>
             <div className="py-5">
-              <div className="flex gap-4 justify-between">
-                <div className="capitalize font-grilroyMedium">{state}</div>
+              <div className="lg:flex lg:gap-4 lg:justify-between">
+                <div className="hidden lg:block capitalize font-grilroyMedium">
+                  {state}
+                </div>
                 <div>
                   <SearchBox />
                 </div>
@@ -27,7 +29,7 @@ const Home = () => {
             </div>
             <Outlet />
           </div>
-          <div>
+          <div className="hidden lg:block">
             <SidebarRight />
           </div>
         </div>
