@@ -35,7 +35,7 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
         <div>
           <data.icon />
         </div>
-        <div>{data.title}</div>
+        <div className="hidden lg:block">{data.title}</div>
       </div>
       {option && (
         <div>
@@ -46,7 +46,7 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
             }`}
           >
             <div>{subOption ? <BackIcon /> : <Moon />}</div>
-            <div>Display & Mode</div>
+            <div className="hidden lg:block">Display & Mode</div>
           </div>
           {subOption && (
             <>
@@ -83,7 +83,7 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
             <div>
               <Logout />
             </div>
-            <div>Logout</div>
+            <div className="hidden lg:block">Logout</div>
           </div>
         </div>
       )}
@@ -92,19 +92,21 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
 
   return (
     <>
-      {settingSeperation ? (
-        settingSeperation
-      ) : (
-        <div
-          onClick={() => handleOption(data)} //navigate(data.key || "#")
-          className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 `}
-        >
-          <div>
-            <data.icon />
+      <div>
+        {settingSeperation ? (
+          settingSeperation
+        ) : (
+          <div
+            onClick={() => handleOption(data)} //navigate(data.key || "#")
+            className={`${className} flex gap-3 items-center hover:bg-color-blue hover:text-color-white py-3 px-5 rounded-lg hover:cursor-pointer transition-all duration-150 ease-linear text-color-blue my-2 `}
+          >
+            <div>
+              <data.icon />
+            </div>
+            <div className="hidden lg:block">{data.title}</div>
           </div>
-          <div>{data.title}</div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

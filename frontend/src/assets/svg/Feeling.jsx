@@ -1,4 +1,4 @@
-function Feeling() {
+function Feelingicon() {
   return (
     <svg width={24} height={24} fill="#333" viewBox="0 0 24 24">
       <g fillRule="evenodd">
@@ -20,4 +20,4 @@ function Feeling() {
   );
 }
 
-export default Feeling;
+export default Feelingicon;

@@ -44,18 +44,20 @@ const SidebarLeft = ({ user, state }) => {
         <div className="flex justify-center my-5">
           <div>
             <div className="text-center">
-              <div className="w-24 h-24 rounded-full bg-color-purple-light mx-auto mb-2 overflow-hidden object-cover">
+              <div className="w-14 h-14 lg:w-24 lg:h-24 rounded-full bg-color-purple-light mx-auto mb-2 overflow-hidden object-cover">
                 <img
                   src={user.profilePic || defaultProPic}
                   alt={user.username || "Profile Picture"}
                 />
               </div>
-              <p className="font-grilroyBold text-lg">
+              <p className="hidden lg:block font-grilroyBold text-lg">
                 {user.fname + " " + user.lname}
               </p>
-              <p className="font-grilroyLight text-sm">{user.email}</p>
+              <p className="hidden lg:block font-grilroyLight text-sm">
+                {user.email}
+              </p>
             </div>
-            <div className="my-8">
+            <div className="lg:my-8">
               {data?.map((data, i) => (
                 <IconGroupOne key={i} data={data} Sidestate={setSideState} />
               ))}

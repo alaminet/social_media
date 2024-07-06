@@ -7,6 +7,7 @@ export default {
       "color-purple": "var(--color-purple)",
       "color-purple-light": "var(--color-purple-light)",
       "color-blue": "var(--color-blue)",
+      "color-input": "var(--color-input)",
       "color-border": "var(--color-border)",
       "color-white": "var(--color-white)",
       "color-black": "var(--color-black)",

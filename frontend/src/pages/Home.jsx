@@ -45,17 +45,17 @@ const Home = () => {
   return (
     <>
       <div>
-        <div className="grid gap-4 lg:grid-cols-[1fr,3fr,1fr] px-3">
-          <div className="hidden lg:block">
+        <div className="grid gap-6 sm:grid-cols-[1fr,5fr] lg:grid-cols-[1fr,3fr,1fr] px-3">
+          <div className="hidden sm:block">
             <SidebarLeft user={userInfo} state={setState} />
           </div>
           <div>
             <div className="py-5">
               <div className="flex gap-4 justify-between">
-                <div className="hidden lg:block capitalize font-grilroyMedium">
+                <div className="hidden sm:block capitalize font-grilroyMedium">
                   {state}
                 </div>
-                <div className="lg:hidden">
+                <div className="sm:hidden">
                   <div className="w-10 h-10 rounded-full bg-color-purple-light mx-auto mb-2 overflow-hidden object-cover">
                     <img
                       src={userInfo.profilePic || defaultProPic}
@@ -63,9 +63,9 @@ const Home = () => {
                     />
                   </div>
                 </div>
-                <div className="lg:hidden flex gap-1 justify-center items-center">
+                <div className="sm:hidden flex gap-1 justify-center items-center">
                   {menuData?.map((item, i) => (
-                    <Link to={item.key}>
+                    <Link key={i} to={item.key}>
                       <div className="flex justify-center items-center w-8 h-8 rounded-full hover:bg-color-blue hover:text-color-white text-sm">
                         <item.icon />
                       </div>
