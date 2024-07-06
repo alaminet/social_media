@@ -9,7 +9,7 @@ import ModalStatus from "../components/ModalStatus";
 const NewsFeed = () => {
   const { userInfo } = useSelector((user) => user.loginSlice);
   const [modal, setModal] = useState(false);
-  console.log(modal);
+
   const postOptionData = [
     {
       title: "Live",

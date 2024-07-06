@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import defaultProPic from "../assets/images/avatar_boy_cap.png";
 import { CircleCloseIcon } from "../assets/svg/CircleClose";
 import { Media } from "../assets/svg/Media";
-import { FaCaretDown, FaGlobeAsia } from "react-icons/fa";
+import { FaGlobeAsia } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { LiveIcon } from "../assets/svg/Live";
 import { Camera } from "../assets/svg/Camera";
+import EmojiPickers from "./EmojiPickers";
 
 const ModalStatus = ({ show }) => {
   const { userInfo } = useSelector((user) => user.loginSlice);
+  const textRef = useRef(null);
+  const [postText, setPostText] = useState("");
+  
   return (
     <>
       <div className="fixed top-0 left-0 bg-[#000000ba] w-full h-screen z-20 flex justify-center items-center font-grilroyRegular">
@@ -51,11 +55,22 @@ const ModalStatus = ({ show }) => {
             <div>
               <div className="py-4">
                 <textarea
+                  ref={textRef}
+                  onChange={(e) => setPostText(e.target.value)}
+                  value={postText}
                   className="w-full outline-none p-3 font-grilroyRegular rounded"
                   name="status"
                   rows="4"
                   placeholder={`What's on your mind, ${userInfo.lname}?`}
                 ></textarea>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="w-6 h-6 bg-gradient-to-r from-color-blue to-color-purple rounded cursor-pointer"></div>
+                </div>
+                <EmojiPickers setPostText={setPostText} postText={postText} textRef={textRef}/>
               </div>
             </div>
             <div>
