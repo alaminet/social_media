@@ -24,8 +24,8 @@ const EmojiPickers = ({ setPostText, postText, textRef }) => {
         <div onClick={() => setShowEmoji(!showEmoji)}>
           <Feelingicon />
         </div>
-        <div className="absolute bottom-7 right-0">
-          {showEmoji && <EmojiPicker height={400} onEmojiClick={handleEmoji} />}
+        <div className="absolute -top-4 right-8">
+          {showEmoji && <EmojiPicker height={300} onEmojiClick={handleEmoji} />}
         </div>
       </div>
     </>

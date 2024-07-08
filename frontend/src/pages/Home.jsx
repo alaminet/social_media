@@ -65,11 +65,13 @@ const Home = () => {
                 </div>
                 <div className="sm:hidden flex gap-1 justify-center items-center">
                   {menuData?.map((item, i) => (
-                    <Link key={i} to={item.key}>
-                      <div className="flex justify-center items-center w-8 h-8 rounded-full hover:bg-color-blue hover:text-color-white text-sm">
-                        <item.icon />
-                      </div>
-                    </Link>
+                    <div key={i}>
+                      <Link to={item.key}>
+                        <div className="flex justify-center items-center w-8 h-8 rounded-full hover:bg-color-blue hover:text-color-white text-sm">
+                          <item.icon />
+                        </div>
+                      </Link>
+                    </div>
                   ))}
                 </div>
                 <div>
