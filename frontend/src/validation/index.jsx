@@ -13,6 +13,10 @@ export const signInValid = Yup.object({
   password: Yup.string().min(5).required("Please enter your Password"),
 });
 
+export const passwordValid = Yup.object({
+  password: Yup.string().min(5).required("Please enter your Password"),
+});
+
 export const otpValid = Yup.object({
   otp: Yup.string().required("Please enter your OTP"),
 });

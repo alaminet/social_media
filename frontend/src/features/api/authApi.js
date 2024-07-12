@@ -38,6 +38,13 @@ export const authApi = createApi({
         body,
       }),
     }),
+    findUser: builder.mutation({
+      query: (body) => ({
+        url: "/v1/api/auth/finduser",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 export const {
@@ -46,4 +53,5 @@ export const {
   useOtpVerifyMutation,
   useResendOTPMutation,
   useTokenVerifyMutation,
+  useFindUserMutation,
 } = authApi;
