@@ -5,7 +5,7 @@ import { BackIcon } from "../assets/svg/backIcon";
 import { Logout } from "../assets/svg/Logout";
 import SunIcon from "../assets/svg/SunIcon";
 import { useDispatch } from "react-redux";
-import { Loginuser } from "../features/userSlice";
+import { logOutUser } from "../features/userSlice";
 
 const IconGroupOne = ({ className, data, Sidestate }) => {
   const [option, setOption] = useState(false);
@@ -21,7 +21,8 @@ const IconGroupOne = ({ className, data, Sidestate }) => {
   };
   const handleLogOut = () => {
     localStorage.removeItem("user");
-    dispatch(Loginuser(null));
+    dispatch(logOutUser());
+    navigate("/login");
   };
 
   const settingSeperation = data.title === "Settings" && (

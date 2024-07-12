@@ -16,6 +16,7 @@ import NewsFeed from "./pages/NewsFeed";
 import Message from "./pages/Message";
 import Friends from "./pages/Friends";
 import Media from "./pages/Media";
+import ForgotPass from "./pages/ForgotPass";
 
 function App() {
   const router = createBrowserRouter(
@@ -35,6 +36,7 @@ function App() {
           <Route path="/otp/:email" element={<VerifyOTP />}></Route>
           <Route path="/token/:token" element={<VerifyToken />}></Route>
           <Route path="/resendotp" element={<ResendOTP />}></Route>
+          <Route path="/forgotpassword" element={<ForgotPass />}></Route>
         </Route>
       </Route>
     )

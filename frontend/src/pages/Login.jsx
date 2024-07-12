@@ -39,15 +39,23 @@ const Login = () => {
           });
           console.log(response?.data.userInfo);
 
-            navigate("/");
+          navigate("/");
         }
         // error
+        if (response?.error.status === "FETCH_ERROR") {
+          toast.error("Your Connection Is not stable", {
+            position: "bottom-center",
+            autoClose: 1000,
+            pauseOnHover: false,
+          });
+        }
         if (response?.error) {
           toast.error(response?.error?.data.message, {
             position: "bottom-center",
             autoClose: 1000,
             pauseOnHover: false,
           });
+
           if (response?.error?.data.message === "Account Not Verifyed") {
             setTimeout(() => {
               navigate(`/otp/${formik.values.email}`);
@@ -116,6 +124,12 @@ const Login = () => {
                     <Button className="mt-6 mb-2 w-full" type="submit">
                       Login
                     </Button>
+                    <Link
+                      className="text-color-primary block"
+                      to="/forgotpassword"
+                    >
+                      Forgot Password ?
+                    </Link>
                     <Link className="text-color-primary" to="/signup">
                       You don't have an account !
                     </Link>
