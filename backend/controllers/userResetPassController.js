@@ -9,7 +9,7 @@ const userResetPassController = async (req, res) => {
       bcrypt.hash(password, 10, async function (err, hash) {
         await User.findOneAndUpdate(
           { email: emailExist.email },
-          { $set: { password: hash } },
+          { $set: { password: hash, otp: "", token: "" } },
           { new: true }
         );
         res.status(200).send({ message: "Password updated, Now Login" });
