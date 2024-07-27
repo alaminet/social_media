@@ -1,18 +1,34 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { passwordValid } from "../validation";
+import { useRestPassMutation } from "../features/api/authApi";
 
-const ResetPass = () => {
+const ResetPass = ({ setVisible, user }) => {
+  const navigate = useNavigate();
   const initialState = {
-    email: "",
+    email: user?.email,
     password: "",
+  };
+  const [resetPass, { isLoading }] = useRestPassMutation();
+  const passUpdate = async () => {
+    await resetPass({
+      email: user?.email,
+      password: formik.values.password,
+    })
+      .then((response) => {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const formik = useFormik({
     initialValues: initialState,
     validationSchema: passwordValid,
     onSubmit: (values) => {
-      console.log("Subimt");
+      passUpdate();
     },
   });
   const { errors } = formik;
@@ -30,7 +46,7 @@ const ResetPass = () => {
             type="password"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            name="otp"
+            name="password"
             value={formik.values.password}
             placeholder="Enter New Password"
             className="w-full outline-none border p-2 rounded-md border-color-border"

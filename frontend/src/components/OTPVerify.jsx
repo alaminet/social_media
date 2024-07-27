@@ -1,18 +1,33 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import {  otpValid } from "../validation";
+import { otpValid } from "../validation";
+import { useForgotUserOTPMutation } from "../features/api/authApi";
 
-const OTPVerify = () => {
+const OTPVerify = ({ setVisible, user }) => {
   const initialState = {
-    email: "",
-    otp:""
+    email: user?.email,
+    otp: "",
+  };
+  const [otpVerify, { isLoading }] = useForgotUserOTPMutation();
+  const otpCheck = async () => {
+    await otpVerify({
+      email: user?.email,
+      otp: formik.values.otp,
+    })
+      .then((response) => {
+        console.log(response);
+        setVisible(3);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const formik = useFormik({
     initialValues: initialState,
     validationSchema: otpValid,
     onSubmit: (values) => {
-      console.log("Subimt");
+      otpCheck();
     },
   });
   const { errors } = formik;

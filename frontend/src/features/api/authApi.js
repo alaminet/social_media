@@ -45,6 +45,20 @@ export const authApi = createApi({
         body,
       }),
     }),
+    forgotUserOTP: builder.mutation({
+      query: (body) => ({
+        url: "/v1/api/auth/finduserotpverify",
+        method: "POST",
+        body,
+      }),
+    }),
+    restPass: builder.mutation({
+      query: (body) => ({
+        url: "/v1/api/auth/restpass",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 export const {
@@ -54,4 +68,6 @@ export const {
   useResendOTPMutation,
   useTokenVerifyMutation,
   useFindUserMutation,
+  useForgotUserOTPMutation,
+  useRestPassMutation,
 } = authApi;

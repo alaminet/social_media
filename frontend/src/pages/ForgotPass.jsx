@@ -13,11 +13,11 @@ const ForgotPass = () => {
       case 0:
         return <FindAccount setVisible={setVisible} setUser={setUser} />;
       case 1:
-        return <OTPSend  setVisible={setVisible} user={user}/>;
+        return <OTPSend setVisible={setVisible} user={user} />;
       case 2:
-        return <OTPVerify />;
+        return <OTPVerify setVisible={setVisible} user={user} />;
       case 3:
-        return <ResetPass />;
+        return <ResetPass setVisible={setVisible} user={user}/>;
       default:
         null;
     }
