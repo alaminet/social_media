@@ -19,7 +19,6 @@ const userResetPassController = async (req, res) => {
     }
   } catch (error) {
     res.status(401).send(error);
-    console.log(error);
   }
 };
 

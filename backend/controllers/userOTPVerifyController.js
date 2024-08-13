@@ -28,7 +28,7 @@ const userOTPVerifyController = async (req, res) => {
       res.status(401).send({ message: "Email not Matched" });
     }
   } catch (error) {
-    res.status(401).send(error);
+    res.status(404).send(error);
   }
 };
 

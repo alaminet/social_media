@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const route = require("./route");
 const cors = require("cors");
 const app = express();
@@ -11,6 +12,11 @@ mongoConfig();
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 
 // router api
 app.use(process.env.API_URL, route);
