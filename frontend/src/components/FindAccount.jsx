@@ -8,7 +8,7 @@ const initialState = {
   email: "",
 };
 
-const FindAccount = ({ setVisible, setUser }) => {
+const  FindAccount = ({ setVisible, setUser }) => {
   const [error, setError] = useState();
   const [finduser, { isLoading }] = useFindUserMutation();
   const findUser = async () => {
